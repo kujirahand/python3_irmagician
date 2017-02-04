@@ -120,12 +120,23 @@ class IrMagician:
     def ir_play(self):
         self.command("p\r\n")
 
+    def get_temperature(self):
+        raw = self.command("T\r\n") # reading rw temp...
+        status = self.readline() # reading command status
+        celsius_temp = None
+        try:
+            celsius_temp = ((5.0 / 1024.0 * float(raw)) - 0.4) / 0.01953
+            return celsius_temp
+        except (ValueError, TypeError):
+            return None
+
 if __name__ == '__main__':
     mag = IrMagician()
     mag.set_debug(True)
-    #mag.ir_capture_ex()
-    #mag.ir_save("test.json")
+    mag.ir_capture_ex()
+    mag.ir_save("test.json")
     mag.ir_load("test.json")
     mag.ir_play()
+    print("temp="+mag.get_temperature())
 
 
