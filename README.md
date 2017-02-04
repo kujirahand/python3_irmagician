@@ -4,6 +4,14 @@ irMagician Library for Python3
 
 ## How to use
 
+This library need `pyserial`.
+
+```
+$ sudo pip3 install pyserial
+```
+
+Sample code:
+
 ```
 from irmagician import IrMagician
 
